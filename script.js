@@ -272,3 +272,16 @@ ADVERTENCIA: Este reporte fue confirmado legalmente por el usuario.
 
     renderReports();
 });
+
+// PWA: Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(registration => {
+                console.log('ServiceWorker registrado con éxito con el scope: ', registration.scope);
+            })
+            .catch(error => {
+                console.log('Fallo en el registro del ServiceWorker: ', error);
+            });
+    });
+}
