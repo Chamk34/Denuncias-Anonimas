@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Seguridad Ciudadana - App Móvil</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="app-header">
+        <h1 id="page-title">Denuncia Anónima</h1>
+        <div class="header-accent"></div>
+    </header>
+
+    <!-- Content Sections -->
+    <main class="app-content">
+        
+        <!-- Section: Denuncia -->
+        <section id="section-denuncia" class="active">
+            <div class="card">
+                <p class="section-description">Reporte incidentes de forma segura y anónima. Su información ayuda a mejorar la seguridad de todos.</p>
+                <form id="form-denuncia">
+                    <div class="form-group">
+                        <label for="tipo-incidente">Tipo de Incidente</label>
+                        <select id="tipo-incidente" required>
+                            <option value="" disabled selected>Seleccione una opción</option>
+                            <option value="Robo">Robo / Hurto</option>
+                            <option value="Vandalismo">Vandalismo</option>
+                            <option value="Accidente">Accidente de Tránsito</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea id="descripcion" rows="4" placeholder="Describa lo sucedido con detalles..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ubicacion">Ubicación</label>
+                        <div class="input-with-icon">
+                            <i class="material-icons">place</i>
+                            <input type="text" id="ubicacion" placeholder="Calle, Barrio o Referencia" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Multimedia (Opcional)</label>
+                        <div class="media-upload-container">
+                            <label class="media-btn" title="Subir Foto/Video">
+                                <i class="material-icons">perm_media</i>
+                                <span>Fotos/Videos</span>
+                                <input type="file" id="media-files" accept="image/*,video/*" multiple hidden>
+                            </label>
+                            <label class="media-btn" title="Grabar Audio">
+                                <i class="material-icons">mic</i>
+                                <span>Audio</span>
+                                <input type="file" id="audio-files" accept="audio/*" hidden>
+                            </label>
+                        </div>
+                    <div class="form-group legal-consent">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="legal-check">
+                            <span class="checkmark"></span>
+                            Certifico que la información proporcionada es real. Entiendo que realizar denuncias falsas es un delito penado por la ley.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="btn-submit" disabled>
+                        <i class="material-icons">send</i>
+                        Enviar Denuncia
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Section: Reportes -->
+        <section id="section-reportes">
+            <div class="report-list" id="report-container">
+                <!-- Se inyectarán los datos aquí -->
+                <div class="empty-state">
+                    <i class="material-icons">assignment_late</i>
+                    <p>No hay reportes registrados aún.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Ajustes -->
+        <section id="section-ajustes">
+            <div class="card">
+                <h3>Contacto Policial - La Rioja</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="material-icons">phone</i>
+                        <div>
+                            <strong>Emergencias</strong>
+                            <p>911 / 101</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="material-icons">email</i>
+                        <div>
+                            <strong>Email Oficial</strong>
+                            <p>chamiplay@hotmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card danger-card">
+                <h3>Acción Inmediata</h3>
+                <p>En caso de riesgo de vida inminente, use el botón de pánico.</p>
+                <a href="tel:911" class="btn-emergency">
+                    <i class="material-icons">report_problem</i>
+                    LLAMAR A EMERGENCIAS
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-section="denuncia">
+            <i class="material-icons">campaign</i>
+            <span>Denuncia</span>
+        </button>
+        <button class="nav-item" data-section="reportes">
+            <i class="material-icons">history</i>
+            <span>Reportes</span>
+        </button>
+        <button class="nav-item" data-section="ajustes">
+            <i class="material-icons">settings</i>
+            <span>Ajustes</span>
+        </button>
+    </nav>
+
+    <script src="script.js?v=3"></script>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="material-icons danger-icon">warning</i>
+                <h2>Confirmar Denuncia</h2>
+            </div>
+            <div class="modal-body">
+                <p>Por favor, revise los datos antes de enviar. Una vez enviada, la policía de La Rioja procesará la información.</p>
+                <div id="modal-summary" class="summary-box"></div>
+                <p class="warning-text"><strong>ADVERTENCIA:</strong> Proporcionar información falsa es un delito bajo el Código Penal Argentino.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="modal-cancel" class="btn-outline">Cancelar</button>
+                <button id="modal-confirm" class="btn-primary">Confirmar y Enviar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
