@@ -217,9 +217,9 @@ INFO TECNICA DE VALIDACION:
 
 ADVERTENCIA: Este reporte fue confirmado legalmente por el usuario.
         `;
-        // Abrir en Gmail web
-        const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.open(gmailLink, '_blank');
+        // Abrir en el cliente de correo predeterminado (evita pedir inicio de sesión en el navegador)
+        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
     }
 
     // --- Persistence Logic ---
