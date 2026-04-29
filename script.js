@@ -13,6 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ajustes: 'Información y Ajustes'
     };
 
+    // --- Splash Screen Logic ---
+    const splash = document.getElementById('splash-screen');
+    setTimeout(() => {
+        splash.classList.add('hidden');
+        setTimeout(() => splash.style.display = 'none', 500);
+    }, 2000);
+
     // --- Navigation Logic ---
     navItems.forEach(item => {
         item.addEventListener('click', () => {
